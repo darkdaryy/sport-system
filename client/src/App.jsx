@@ -1,3 +1,5 @@
+import ProtectedRoute from "./components/ProtectedRoute";
+import NotFound from "./pages/NotFound";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 
@@ -35,7 +37,14 @@ function App() {
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                 <Profile />
+              </ProtectedRoute>
+  }
+/>
         </Routes>
       </div>
     </BrowserRouter>
@@ -43,3 +52,4 @@ function App() {
 }
 
 export default App;
+<Route path="*" element={<NotFound />} />
