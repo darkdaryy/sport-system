@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import api from "../services/api";
 import sectionsData from "../data/sectionsData";
 
 function EnrollSection() {
@@ -13,47 +14,51 @@ function EnrollSection() {
     childFullName: "",
     childAge: "",
     phone: "",
-    note: ""
+    note: "",
   });
+
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const handleChange = (e) => {
     setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setError("");
+    setSuccess("");
 
     const user = JSON.parse(localStorage.getItem("user"));
 
     if (!user) {
-      alert("Сначала войдите в аккаунт");
+      setError("Сначала войдите в аккаунт");
       return;
     }
 
-    const enrollments =
-      JSON.parse(localStorage.getItem("enrollments")) || [];
+    try {
+      await api.post("/enrollments", {
+        userEmail: user.email,
+        section: section.title,
+        ...formData,
+      });
 
-    enrollments.push({
-      userEmail: user.email,
-      section: section.title,
-      ...formData
-    });
+      setSuccess("Заявка успешно отправлена");
 
-    localStorage.setItem("enrollments", JSON.stringify(enrollments));
-
-    alert("Заявка отправлена");
-    navigate("/profile");
+      setTimeout(() => {
+        navigate("/profile");
+      }, 800);
+    } catch (err) {
+      setError(err.response?.data?.message || "Ошибка при отправке заявки");
+    }
   };
 
   if (!section) {
-    return (
-      <div style={{ padding: "40px" }}>
-        Секция не найдена
-      </div>
-    );
+    return <div style={{ padding: "40px" }}>Секция не найдена</div>;
   }
 
   return (
@@ -68,6 +73,7 @@ function EnrollSection() {
             placeholder="ФИО родителя"
             value={formData.parentName}
             onChange={handleChange}
+            required
           />
 
           <input
@@ -76,6 +82,7 @@ function EnrollSection() {
             placeholder="ФИО ребёнка"
             value={formData.childFullName}
             onChange={handleChange}
+            required
           />
 
           <input
@@ -84,6 +91,7 @@ function EnrollSection() {
             placeholder="Возраст ребёнка"
             value={formData.childAge}
             onChange={handleChange}
+            required
           />
 
           <input
@@ -92,6 +100,7 @@ function EnrollSection() {
             placeholder="Телефон"
             value={formData.phone}
             onChange={handleChange}
+            required
           />
 
           <textarea
@@ -100,6 +109,9 @@ function EnrollSection() {
             value={formData.note}
             onChange={handleChange}
           />
+
+          {error && <p className="form-error">{error}</p>}
+          {success && <p className="form-success">{success}</p>}
 
           <button type="submit" className="glow-btn">
             Отправить заявку

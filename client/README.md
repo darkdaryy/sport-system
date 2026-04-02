@@ -1,16 +1,56 @@
-# React + Vite
+# 🏋️‍♀️ SportClub — Система управления спортивными секциями
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📌 Описание проекта
 
-Currently, two official plugins are available:
+SportClub — это веб-приложение для управления спортивными секциями и расписанием тренировок.  
+Пользователи могут регистрироваться, записываться на секции и управлять своими заявками через личный кабинет.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🚀 Основной функционал
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 🔐 Регистрация и авторизация пользователей
+- 🏆 Просмотр спортивных секций
+- 🗓 Просмотр расписания тренировок
+- 📝 Запись на секции (в том числе для детей)
+- 👤 Личный кабинет пользователя
+- 📋 Просмотр своих заявок
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🥊 Доступные секции
+
+- Современные танцы (Jazz Funk)
+- Дзюдо
+- MMA
+- Тхэквондо
+- Футбол
+- Баскетбол
+
+---
+
+## 🛠 Используемые технологии
+
+### Frontend:
+- React (Vite)
+- CSS (адаптивный дизайн)
+
+### Backend:
+- Node.js
+- Express
+
+### База данных:
+- MongoDB (Mongoose)
+
+### Дополнительно:
+- Postman (для тестирования API)
+- Git / GitHub
+
+---
+
+## ⚙️ Установка и запуск проекта
+
+### 1. Клонировать репозиторий
+
+```bash
+git clone https://github.com/ТВОЙ-НИК/sport-system.git

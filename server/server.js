@@ -1,3 +1,4 @@
+const enrollmentRoutes = require("./routes/enrollmentRoutes");
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
@@ -11,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
+app.use("/api/enrollments", enrollmentRoutes);
 
 app.get("/", (req, res) => {
   res.send("Server is running 🚀");
